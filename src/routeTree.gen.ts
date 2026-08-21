@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FormationCuisineRouteImport } from './routes/formation-cuisine'
+import { Route as FormationPizzaioloRouteImport } from './routes/formation-pizzaiolo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +30,69 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FormationCuisineRoute = FormationCuisineRouteImport.update({
+  id: '/formation-cuisine',
+  path: '/formation-cuisine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormationPizzaioloRoute = FormationPizzaioloRouteImport.update({
+  id: '/formation-pizzaiolo',
+  path: '/formation-pizzaiolo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
+  '/formation-cuisine': typeof FormationCuisineRoute
+  '/formation-pizzaiolo': typeof FormationPizzaioloRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
+  '/formation-cuisine': typeof FormationCuisineRoute
+  '/formation-pizzaiolo': typeof FormationPizzaioloRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
+  '/formation-cuisine': typeof FormationCuisineRoute
+  '/formation-pizzaiolo': typeof FormationPizzaioloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/a-propos' | '/contact'
+  fullPaths:
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/formation-cuisine'
+    | '/formation-pizzaiolo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a-propos' | '/contact'
-  id: '__root__' | '/' | '/a-propos' | '/contact'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/formation-cuisine'
+    | '/formation-pizzaiolo'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-propos'
+    | '/contact'
+    | '/formation-cuisine'
+    | '/formation-pizzaiolo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
   ContactRoute: typeof ContactRoute
+  FormationCuisineRoute: typeof FormationCuisineRoute
+  FormationPizzaioloRoute: typeof FormationPizzaioloRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +118,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/formation-cuisine': {
+      id: '/formation-cuisine'
+      path: '/formation-cuisine'
+      fullPath: '/formation-cuisine'
+      preLoaderRoute: typeof FormationCuisineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/formation-pizzaiolo': {
+      id: '/formation-pizzaiolo'
+      path: '/formation-pizzaiolo'
+      fullPath: '/formation-pizzaiolo'
+      preLoaderRoute: typeof FormationPizzaioloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +139,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
   ContactRoute: ContactRoute,
+  FormationCuisineRoute: FormationCuisineRoute,
+  FormationPizzaioloRoute: FormationPizzaioloRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
